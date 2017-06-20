@@ -10,51 +10,11 @@
 <body>
 <header class="clearfix">
 
-    <div id="logo">
+    <div class="block_container">
+    <div class="block" id="logo-block">
         <?php echo invoice_logo_pdf(); ?>
     </div>
-
-    <div id="client">
-        <div>
-            <b><?php _htmlsc(format_client($invoice)); ?></b>
-        </div>
-        <?php if ($invoice->client_vat_id) {
-            echo '<div>' . trans('vat_id_short') . ': ' . $invoice->client_vat_id . '</div>';
-        }
-        if ($invoice->client_tax_code) {
-            echo '<div>' . trans('tax_code_short') . ': ' . $invoice->client_tax_code . '</div>';
-        }
-        if ($invoice->client_address_1) {
-            echo '<div>' . htmlsc($invoice->client_address_1) . '</div>';
-        }
-        if ($invoice->client_address_2) {
-            echo '<div>' . htmlsc($invoice->client_address_2) . '</div>';
-        }
-        if ($invoice->client_city || $invoice->client_state || $invoice->client_zip) {
-            echo '<div>';
-            if ($invoice->client_city) {
-                echo htmlsc($invoice->client_city) . ' ';
-            }
-            if ($invoice->client_state) {
-                echo htmlsc($invoice->client_state) . ' ';
-            }
-            if ($invoice->client_zip) {
-                echo htmlsc($invoice->client_zip);
-            }
-            echo '</div>';
-        }
-        if ($invoice->client_country) {
-            echo '<div>' . get_country_name(trans('cldr'), $invoice->client_country) . '</div>';
-        }
-
-        echo '<br/>';
-
-        if ($invoice->client_phone) {
-            echo '<div>' . trans('phone_abbr') . ': ' . htmlsc($invoice->client_phone) . '</div>';
-        } ?>
-
-    </div>
-    <div id="company">
+    <div class="block" id="client-block">
         <div><b><?php _htmlsc($invoice->user_name); ?></b></div>
         <?php if ($invoice->user_vat_id) {
             echo '<div>' . trans('vat_id_short') . ': ' . $invoice->user_vat_id . '</div>';
@@ -95,13 +55,13 @@
         }
         ?>
     </div>
+    </div>
 
-</header>
-
-<main>
-
-    <div class="invoice-details clearfix">
+    <div class="invoice-details-block clearfix" style="background-color: #eceff1;">
         <table>
+            <tr>
+                <td><h1 class="invoice-title"><?php echo trans('invoice') . ' #' . $invoice->invoice_number; ?></h1></td>
+            </tr>
             <tr>
                 <td><?php echo trans('invoice_date') . ':'; ?></td>
                 <td><?php echo date_from_mysql($invoice->invoice_date_created, true); ?></td>
@@ -123,7 +83,54 @@
         </table>
     </div>
 
-    <h1 class="invoice-title"><?php echo trans('invoice') . ' ' . $invoice->invoice_number; ?></h1>
+    <div id="client">
+        <div>
+            <b>Invoiced To</b><br>
+            <?php _htmlsc(format_client($invoice)); ?>
+        </div>
+        <?php if ($invoice->client_vat_id) {
+            echo '<div>' . trans('vat_id_short') . ': ' . $invoice->client_vat_id . '</div>';
+        }
+        if ($invoice->client_tax_code) {
+            echo '<div>' . trans('tax_code_short') . ': ' . $invoice->client_tax_code . '</div>';
+        }
+        if ($invoice->client_address_1) {
+            echo '<div>' . htmlsc($invoice->client_address_1) . '</div>';
+        }
+        if ($invoice->client_address_2) {
+            echo '<div>' . htmlsc($invoice->client_address_2) . '</div>';
+        }
+        if ($invoice->client_city || $invoice->client_state || $invoice->client_zip) {
+            echo '<div>';
+            if ($invoice->client_city) {
+                echo htmlsc($invoice->client_city) . ' ';
+            }
+            if ($invoice->client_state) {
+                echo htmlsc($invoice->client_state) . ' ';
+            }
+            if ($invoice->client_zip) {
+                echo htmlsc($invoice->client_zip);
+            }
+            echo '</div>';
+        }
+        if ($invoice->client_country) {
+            echo '<div>' . get_country_name(trans('cldr'), $invoice->client_country) . '</div>';
+        }
+
+        echo '<br/>';
+
+        if ($invoice->client_phone) {
+            echo '<div>' . trans('phone_abbr') . ': ' . htmlsc($invoice->client_phone) . '</div>';
+        } ?>
+
+    </div>
+    <div id="company">
+        
+    </div>
+
+</header>
+
+<main>
 
     <table class="item-table">
         <thead>
