@@ -1,0 +1,25 @@
+/* =============================================================================
+   InvoicePlane
+   Custom Stylesheet by mobihack
+
+   All changes made in this file will override the default styles in PDFs.
+   ========================================================================== */
+.block_container
+{
+ 	margin-bottom: 20px;
+}
+#logo-block{
+	float: left;
+    width: 40%;
+}
+#client-block{
+	float: right;
+    width: 55%;
+    text-align: right;
+    margin-right: 5%
+}
+.invoice-details-block{
+	background-color: #b0bec5;
+	padding:5px;
+	margin-bottom: 20px;
+}
